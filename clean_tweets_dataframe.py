@@ -16,10 +16,10 @@ class Clean_Tweets:
         """
         unwanted_rows = df[df['retweet_count'] == 'retweet_count' ].index
         df.drop(unwanted_rows , inplace=True)
-        columns = ['created_at', 'source', 'original_text', 'polarity', 'subjectivity', 'lang', 'favorite_count',
-                   'retweet_count',
-                   'original_author', 'followers_count', 'friends_count', 'possibly_sensitive', 'hashtags',
-                   'user_mentions', 'place', 'statuses_count']
+        columns = ['created_at', 'source', 'original_text', 'cleaned_text', 'sentiment', 'polarity', 'subjectivity',
+                   'lang', 'favorite_count', 'retweet_count',
+                   'original_author', 'screen_count', 'followers_count', 'friends_count', 'possibly_sensitive',
+                   'hashtags', 'user_mentions', 'place', 'place_coord_boundaries', 'statuses_count']
         for col in columns:
             df = df[df[col] != col]
         return df
@@ -44,7 +44,7 @@ class Clean_Tweets:
         convert columns like polarity, subjectivity, retweet_count
         favorite_count etc to numbers
         """
-        columns_to_convert = ['polarity','subjectivity, retweet_count','favorite_count', 'followers_count','friends_count','statuses_count']
+        columns_to_convert = ['polarity','subjectivity, retweet_count','favorite_count', 'screen_count', 'followers_count','friends_count','statuses_count']
         df[columns_to_convert] = data[columns_to_convert].apply(pd.to_numeric, errors='coerce')
         return df
     
