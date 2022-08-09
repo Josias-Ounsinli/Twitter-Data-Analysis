@@ -72,7 +72,7 @@ class TweetDfExtractor:
         try:
             is_sensitive = [x['possibly_sensitive'] for x in self.tweets_list]
         except KeyError:
-            is_sensitive = []
+            is_sensitive = None
 
         return is_sensitive
 
@@ -144,4 +144,3 @@ if __name__ == "__main__":
 
     # use all defined functions to generate a dataframe with the specified columns above
 
-print(tweet_df)
