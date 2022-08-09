@@ -69,10 +69,11 @@ class TweetDfExtractor:
         return friends_count
 
     def is_sensitive(self)->list:
-        try:
+        try:data = zip(created_at, source, text, polarity, subjectivity, lang, fav_count, retweet_count, screen_name, follower_count, friends_count, sensitivity, hashtags, mentions, location)
+TypeError: 'NoneType' object is not iterable
             is_sensitive = [x['possibly_sensitive'] for x in self.tweets_list]
         except KeyError:
-            is_sensitive = []
+            is_sensitive = None
 
         return is_sensitive
 
@@ -144,3 +145,4 @@ if __name__ == "__main__":
 
     # use all defined functions to generate a dataframe with the specified columns above
 
+print(tweet_df)
