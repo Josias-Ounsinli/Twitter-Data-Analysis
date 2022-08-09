@@ -1,7 +1,7 @@
 import unittest
 import pandas as pd
 import sys, os
-from data_for_tests import tweet_list, tweet, tweet_df, true_statuses_count, true_full_text, true_polarity, true_subjectivity, true_screen_name, true_followers_count, true_friends_count, true_sensitivity, true_hashtags, true_mentions
+from data_for_tests import true_statuses_count, true_full_text, true_polarity, true_subjectivity, true_screen_name, true_followers_count, true_friends_count, true_sensitivity, true_hashtags, true_mentions
 
 
 sys.path.append(os.path.abspath(os.path.join("../..")))
