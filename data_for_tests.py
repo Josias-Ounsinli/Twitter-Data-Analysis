@@ -2,7 +2,7 @@ import json
 from textblob import TextBlob
 
 data = []
-for t in open("/home/jds98/10 Academy/Pycharm/africa_twitter_data.json",'r'):
+for t in open("tests/sampletweet.json",'r'):
     data.append(json.loads(t))
 
 true_statuses_count = [x['user']['statuses_count'] for x in data[:5]]
