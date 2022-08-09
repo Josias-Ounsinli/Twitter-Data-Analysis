@@ -56,11 +56,14 @@ class TweetDfExtractor:
             clean_text.append(new)
         return clean_text
 
-    def find_sentiments(self, text)->list:
+    def find_sentiment(self, text)->list:
         sentiment = [TextBlob(t).sentiment for t in text]
+        return sentiment
+
+    def find_sentiments(self, text)->list:
         polarity = [TextBlob(t).sentiment.polarity for t in text]
         self.subjectivity = [TextBlob(t).sentiment.subjectivity for t in text]
-        return sentiment, polarity, self.subjectivity
+        return polarity, self.subjectivity
 
     def find_created_time(self)->list:
         created_at = [tweet['created_at'] for tweet in self.tweets_list]
@@ -141,7 +144,8 @@ class TweetDfExtractor:
         source = self.find_source()
         text = self.find_full_text()
         clean_text = self.clean_text(text)
-        sentiment, polarity, subjectivity = self.find_sentiments(text)
+        sentiment = self.find_sentiment(text)
+        polarity, subjectivity = self.find_sentiments(text)
         lang = self.find_lang()
         fav_count = self.find_favourite_count()
         retweet_count = self.find_retweet_count()
