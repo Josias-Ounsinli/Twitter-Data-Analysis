@@ -23,5 +23,3 @@ for x in data[:5]:
             true_sensitivity.append(None)
 true_hashtags = [x['entities']['hashtags'] for x in data[:5]]
 true_mentions = [x['entities']['user_mentions'] for x in data[:5]]
-
-Z
