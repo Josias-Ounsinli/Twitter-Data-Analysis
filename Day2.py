@@ -9,6 +9,8 @@ import string
 import os
 import re
 from textblob import TextBlob
+from sklearn.model_selection import train_test_split
+
 
 # The data
 data = pd.read_csv('cleaned_fintech_data.csv')
@@ -111,3 +113,23 @@ plt.savefig('scores_plot1.png')
 plt.figure()
 cleanTweet['scores'].value_counts().plot(kind='bar')
 plt.savefig('scores_plot2.png')
+
+# Remove rows from cleanTweet where 𝐩𝐨𝐥𝐚𝐫𝐢𝐭𝐲 =0 (i.e where 𝐬𝐜𝐨𝐫𝐞 = Neutral) and reset the frame index.
+print(cleanTweet.columns)
+print(cleanTweet.shape)
+print(cleanTweet[cleanTweet['scores'] == 'neutral']["scores"].value_counts())
+cleanTweet = cleanTweet[cleanTweet['scores'] != 'neutral']
+print(cleanTweet.shape)
+
+# Construct a column 𝐬𝐜𝐨𝐫𝐞𝐦𝐚𝐩 Use the mapping {'positive':1, 'negative':0} on the 𝐬𝐜𝐨𝐫𝐞 column
+scoremap = {'positive':1, 'negative':0}
+cleanTweet['scoremap'] = cleanTweet['scores'].map(scoremap)
+
+# Create feature and target variables (X,y) from 𝐜𝐥𝐞𝐚𝐧-𝐭𝐞𝐱𝐭 and 𝐬𝐜𝐨𝐫𝐞𝐦𝐚𝐩 columns respectively.
+X = cleanTweet['text']
+y = cleanTweet['scoremap']
+print(X)
+print(y)
+
+# Use train_test_split function to construct (X_train, y_train) and (X_test, y_test) from (X,y)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state= 5)
